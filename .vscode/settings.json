@@ -1,0 +1,10 @@
+{
+    "editor.rulers": [
+        80, // Vertical ruler at column 80
+        100 // Vertical ruler at column 100
+    ],
+    "[r]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "REditorSupport.r",
+    }
+}
