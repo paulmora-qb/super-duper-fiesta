@@ -16,16 +16,16 @@ source("./practicals/practical_1/src/exercise_3.r")
 #' @example
 #'
 compute_mean_power_std <- function(m, n, k, lambda) {
-    # Initialize a vector to store the mean power values
-    mean_power_values <- numeric(m)
+  # Initialize a vector to store the mean power values
+  mean_power_values <- numeric(m)
 
-    for (i in 1:m) {
-        # Sample from the Weibull distribution
-        samples <- weibull_rejection_sampler(n, k, lambda)
-        mean_power_values[i] <- mean(samples)
-    }
+  for (i in 1:m) {
+    # Sample from the Weibull distribution
+    samples <- weibull_rejection_sampler(n, k, lambda)
+    mean_power_values[i] <- mean(samples)
+  }
 
-    return(sd(mean_power_values) / sqrt(m))
+  return(sd(mean_power_values) / sqrt(m))
 }
 
 n_samples <- 1000

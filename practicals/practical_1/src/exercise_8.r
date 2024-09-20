@@ -17,9 +17,9 @@ library(ggplot2)
 #' @example
 #'
 calculate_average_power_per_day <- function(k, lambda, m) {
-    y_values <- runif(m, 0, 1)
-    samples <- inverse_weibull(y_values = y_values, k = k, lambda = lambda)
-    return(lapply(samples, function(x) power_knot(wind_speed = x)))
+  y_values <- runif(m, 0, 1)
+  samples <- inverse_weibull(y_values = y_values, k = k, lambda = lambda)
+  return(lapply(samples, function(x) power_knot(wind_speed = x)))
 }
 
 #' Create and save boxplot
@@ -39,17 +39,17 @@ calculate_average_power_per_day <- function(k, lambda, m) {
 #' @example
 #'
 create_boxplot <- function(data, x_col, y_col, x_title, y_title, save_path) {
-    # Create the boxplot
-    plot <- ggplot(data, aes_string(x = x_col, y = y_col)) +
-        geom_boxplot(fill = "lightblue", color = "darkblue") +
-        labs(title = "Boxplot", x = x_title, y = y_title) +
-        theme_minimal()
+  # Create the boxplot
+  plot <- ggplot(data, aes_string(x = x_col, y = y_col)) +
+    geom_boxplot(fill = "lightblue", color = "darkblue") +
+    labs(title = "Boxplot", x = x_title, y = y_title) +
+    theme_minimal()
 
-    # Save the plot to the specified file path
-    ggsave(save_path, plot = plot, width = 8, height = 6, dpi = 300)
+  # Save the plot to the specified file path
+  ggsave(save_path, plot = plot, width = 8, height = 6, dpi = 300)
 
-    # Print a message indicating the plot has been saved
-    message(paste("Plot saved to:", save_path))
+  # Print a message indicating the plot has been saved
+  message(paste("Plot saved to:", save_path))
 }
 
 k <- 1.679
@@ -59,7 +59,14 @@ m <- 1000
 samples <- calculate_average_power_per_day(k = k, lambda = lambda, m = m)
 
 boxplot_df <- data.frame(power = unlist(samples))
-create_boxplot(data = boxplot_df, x_col = "power", y_col = NULL, x_title = "Power Percentage", y_title = NULL, save_path = "./practicals/practical_1/data/output/boxplot.png")
+create_boxplot(
+  data = boxplot_df,
+  x_col = "power",
+  y_col = NULL,
+  x_title = "Power Percentage",
+  y_title = NULL,
+  save_path = "./practicals/practical_1/data/output/boxplot.png"
+)
 
 percentage_of_0 <- sum(samples == 0) / length(samples)
 percentage_of_1 <- sum(samples == 1) / length(samples)

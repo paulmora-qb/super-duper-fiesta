@@ -15,31 +15,31 @@ library(ggplot2)
 #' @example
 #'
 weibull_rejection_sampler <- function(n, k, lambda) {
-    # Initialize a vector to store the samples
-    samples <- numeric(n)
-    count <- 0
+  # Initialize a vector to store the samples
+  samples <- numeric(n)
+  count <- 0
 
-    # Define the proposal distribution (e.g., exponential distribution)
-    proposal_lambda <- lambda / (k^(1 / k)) # Scale for the exponential proposal
+  # Define the proposal distribution (e.g., exponential distribution)
+  proposal_lambda <- lambda / (k^(1 / k)) # Scale for the exponential proposal
 
-    # Find the maximum of the Weibull PDF for normalization
-    max_weibull <- dweibull(lambda, shape = k, scale = lambda)
+  # Find the maximum of the Weibull PDF for normalization
+  max_weibull <- dweibull(lambda, shape = k, scale = lambda)
 
-    while (count < n) {
-        # Sample from the proposal distribution
-        x <- rexp(1, rate = 1 / proposal_lambda)
+  while (count < n) {
+    # Sample from the proposal distribution
+    x <- rexp(1, rate = 1 / proposal_lambda)
 
-        # Sample a uniform random number
-        u <- runif(1, 0, max_weibull)
+    # Sample a uniform random number
+    u <- runif(1, 0, max_weibull)
 
-        # Acceptance criterion
-        if (u < dweibull(x, shape = k, scale = lambda)) {
-            count <- count + 1
-            samples[count] <- x
-        }
+    # Acceptance criterion
+    if (u < dweibull(x, shape = k, scale = lambda)) {
+      count <- count + 1
+      samples[count] <- x
     }
+  }
 
-    return(samples)
+  return(samples)
 }
 
 # Exercise 3)
@@ -54,20 +54,20 @@ df_plotting <- data.frame(x = samples)
 
 # Create the plot
 plot <- ggplot(data = df_plotting, aes(x = x)) +
-    geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "lightblue", alpha = 0.5) +
-    geom_density(color = "red", linewidth = 1) +
-    geom_hline(yintercept = 0, linetype = "dashed", color = "blue") +
-    geom_vline(xintercept = mean_value, color = "green", linetype = "dashed", linewidth = 1) +
-    annotate("text",
-        x = mean_value, y = 0.1, label = paste("Mean =", round(mean_value, 2)),
-        color = "green", vjust = -1
-    ) + # Annotate mean
-    labs(
-        title = "Histogram with Overlayed Density Curve",
-        x = "Value",
-        y = "Density"
-    ) +
-    theme_minimal()
+  geom_histogram(aes(y = after_stat(density)), bins = 30, fill = "lightblue", alpha = 0.5) +
+  geom_density(color = "red", linewidth = 1) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue") +
+  geom_vline(xintercept = mean_value, color = "green", linetype = "dashed", linewidth = 1) +
+  annotate("text",
+    x = mean_value, y = 0.1, label = paste("Mean =", round(mean_value, 2)),
+    color = "green", vjust = -1
+  ) + # Annotate mean
+  labs(
+    title = "Histogram with Overlayed Density Curve",
+    x = "Value",
+    y = "Density"
+  ) +
+  theme_minimal()
 
 # Save the plot
 ggsave("./practicals/practical_1/data/output/dweibull_rejection_sampler.png", plot = plot, width = 8, height = 6, dpi = 300)

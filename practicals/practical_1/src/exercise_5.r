@@ -12,7 +12,7 @@
 #' @example
 #'
 inverse_weibull <- function(y_values, k, lambda) {
-    return(qweibull(y_values, shape = k, scale = lambda))
+  return(qweibull(y_values, shape = k, scale = lambda))
 }
 
 

@@ -7,5 +7,15 @@
   "[r]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "REditorSupport.r"
-  }
+  },
+  "quarto.render.previewType": "external",
+  "quarto.visualEditor.defaultListSpacing": "tight",
+  "[quarto]": {
+    "editor.defaultFormatter": "quarto.quarto",
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.snippetSuggestions": "top"
+  },
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false
 }

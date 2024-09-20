@@ -19,7 +19,7 @@ dweibull_pdf <- function(
     x_values,
     k,
     lambda) {
-    return(dweibull(x_values, shape = k, scale = lambda))
+  return(dweibull(x_values, shape = k, scale = lambda))
 }
 
 
@@ -27,10 +27,10 @@ dweibull_pdf <- function(
 data <- read.csv("practicals/practical_1/data/input/WindData.csv")
 dweibull_y_values <- dweibull_pdf(x_values = data$speed, k = 1.679, lambda = 10.128)
 utils_plot_and_save_png(
-    x = x_values,
-    y = dweibull_y_values,
-    x_label = "Hourly wind speed (knots)",
-    y_label = "Probability Density",
-    main_title = "Dweibull PDF",
-    output_path = "./practicals/practical_1/data/output/dweibull_pdf.png"
+  x = x_values,
+  y = dweibull_y_values,
+  x_label = "Hourly wind speed (knots)",
+  y_label = "Probability Density",
+  main_title = "Dweibull PDF",
+  output_path = "./practicals/practical_1/data/output/dweibull_pdf.png"
 )
